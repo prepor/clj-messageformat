@@ -113,14 +113,13 @@
    :zu :hi})
 
 (defn compile-locale?
-   []
-   (prn "---COMPILE1")
-   (if-let [locales (System/getenv "LOCALES")]
-     (let [l (->> (str/split #"," locales)
-                  (map keyword)
-                  (set))]
-       (fn [locale] (contains? l locale)))
-     (constantly true)))
+  []
+  (if-let [locales (System/getenv "LOCALES")]
+    (let [l (->> (str/split #"," locales)
+                 (map keyword)
+                 (set))]
+      (fn [locale] (contains? l locale)))
+    (constantly true)))
 
 
 (defmacro generate-cljs
